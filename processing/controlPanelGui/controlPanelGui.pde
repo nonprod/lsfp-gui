@@ -16,7 +16,7 @@ Serial port;
  
 void setup()  {
   
-    size(1080, 821);
+    size(1080, 821); //woo hoo
     
     textSize(24); 
     fill(0, 102, 153, 255);
