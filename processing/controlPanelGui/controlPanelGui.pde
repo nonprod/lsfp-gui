@@ -1,9 +1,6 @@
 import g4p_controls.*;
-import processing.serial.*; // a fun library
+import processing.serial.*; 
  
-float boxX;
-float boxY;
-int boxSize = 20;
 int lf = 10;      // ASCII linefeed
 
 boolean mouseOverBox = false;
