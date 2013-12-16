@@ -16,7 +16,7 @@ Serial port;
  
 void setup()  {
   
-    size(1080, 821); //woo hoo
+    size(1080, 821);
     
     textSize(24); 
     fill(0, 102, 153, 255);
@@ -43,6 +43,7 @@ void setup()  {
 }
  
 void draw() { 
+    // how neccessary is draw? It seems the program will not run without it
     background(230);
 }
 
