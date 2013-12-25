@@ -138,6 +138,10 @@ public void textfieldCG_change1(GTextField source, GEvent event) { //_CODE_:Came
   println("CameraGOTO - GTextField event occured " + System.currentTimeMillis()%10000000 );
 } //_CODE_:CameraGOTO:785165:
 
+public void dropList1_click1(GDropList source, GEvent event) { //_CODE_:dropList1:205499:
+  println("dropList1 - GDropList event occured " + System.currentTimeMillis()%10000000 );
+} //_CODE_:dropList1:205499:
+
 
 
 // Create all the GUI controls. 
@@ -301,6 +305,9 @@ public void createGUI(){
   ShutterModeDisplay = new GLabel(this, 318, 348, 110, 28);
   ShutterModeDisplay.setText("MANUAL");
   ShutterModeDisplay.setOpaque(false);
+  dropList1 = new GDropList(this, 448, 251, 90, 110, 5);
+  dropList1.setItems(loadStrings("list_205499"), 0);
+  dropList1.addEventHandler(this, "dropList1_click1");
 }
 
 // Variable declarations 
@@ -347,4 +354,5 @@ GTextField CameraFrame;
 GTextField CameraEnd; 
 GTextField CameraGOTO; 
 GLabel ShutterModeDisplay; 
+GDropList dropList1; 
 
