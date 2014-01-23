@@ -5,9 +5,11 @@ int lf = 10;      // ASCII linefeed
 
 boolean mouseOverBox = false;
 boolean runToggle = true;
+boolean directionToggle = true;
 String enteredText;
 GTabManager tt;
 
+GTextField sysMsg;
 GTextField txf1;
 GTextField txf2;
 GTextField txf3;
@@ -36,6 +38,11 @@ void setup()  {
     text("System", 20, 50, 10);
     text("Projector", 20, 250, 10);
     
+    sysMsg = new GTextField(this, 20, 65, 120, 30, G4P.SCROLLBARS_NONE);
+    sysMsg.setOpaque(true);
+    sysMsg.setDefaultText("MESSAGES");
+    sysMsg.addEventHandler(this, "sysMsg_display");
+    
     // left, top, width, height
     txf1 = new GTextField(this, 20, 270, 100, 20);
     txf1.tag = "txf1";
@@ -53,24 +60,25 @@ void setup()  {
     txf4.tag = "txf4";
     txf4.setDefaultText("GoTo");
     
-    imgTogButton11 = new GImageToggleButton(this, 20, 80);// x,y
+    imgTogButton11 = new GImageToggleButton(this, 20, 120);// x,y
     imgTogButton11.addEventHandler(this, "imgTogButton11_click1");
     
-    imgTogButton12 = new GImageToggleButton(this, 90, 80);// x,y
+    imgTogButton12 = new GImageToggleButton(this, 90, 120);// x,y
+    imgTogButton12.addEventHandler(this, "imgTogButton12_click1");
 
-    label11 = new GLabel(this, 20, 60, 40, 20);
+    label11 = new GLabel(this, 20, 100, 40, 20);
     label11.setText("RUN");
     label11.setOpaque(false);
 
-    label12 = new GLabel(this, 20, 130, 40, 20);
+    label12 = new GLabel(this, 20, 170, 40, 20);
     label12.setText("STOP");
     label12.setOpaque(false);
     
-    label13 = new GLabel(this, 90, 60, 40, 20);
+    label13 = new GLabel(this, 90, 100, 40, 20);
     label13.setText("FWD");
     label13.setOpaque(false);
 
-    label14 = new GLabel(this, 90, 130, 40, 20);
+    label14 = new GLabel(this, 90, 170, 40, 20);
     label14.setText("REV");
     label14.setOpaque(false);
 
@@ -118,10 +126,10 @@ public void handleTextEvents(GEditableTextControl tc, GEvent event) {
   }
 }
 
-
 public void sendSerialCommand(String ASCIICommand) {
   System.out.println("from sendSerialCommand: " + ASCIICommand);
   port.write(ASCIICommand);  
+  sysMsg.setText(ASCIICommand);
 }
 
 public void imgTogButton11_click1(GImageToggleButton source, GEvent event) {
@@ -131,6 +139,16 @@ public void imgTogButton11_click1(GImageToggleButton source, GEvent event) {
   } else {
     sendSerialCommand("STOP");
     runToggle = true;
+  }
+}
+
+public void imgTogButton12_click1(GImageToggleButton source, GEvent event) {
+  if (directionToggle) {
+    sendSerialCommand("FWD");
+    directionToggle = false;
+  } else {
+    sendSerialCommand("REV");
+    directionToggle = true;
   }
 }
 
